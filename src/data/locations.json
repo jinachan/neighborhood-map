@@ -1,0 +1,49 @@
+{
+    "all": [
+        {
+            "name": "Dough Zone",
+            "street": "504 5th Ave S",
+            "city": "Seattle",
+            "state": "WA",
+            "zip": "98104",
+            "url": "https://www.doughzonedumplinghouse.com/",
+            "pos": {"lat": 47.597875, "lng": -122.327493}
+        },
+        {
+            "name": "Jade Garden",
+            "street": "424 7th Ave S",
+            "city": "Seattle",
+            "state": "WA",
+            "zip": "98104",
+            "url": "https://www.thestranger.com/locations/205018/jade-garden",
+            "pos": {"lat": 47.598511, "lng": -122.323554}
+        },
+        {
+            "name": "Queen Sheba",
+            "street": "916 E John St",
+            "city": "Seattle",
+            "state": "WA",
+            "zip": "98102",
+            "url": "http://www.ethiopianrestaurantseattle.com/about-us/",
+            "pos": {"lat": 47.620077, "lng": -122.320105}
+        },
+        {
+            "name": "Il Corvo",
+            "street": "217 James St",
+            "city": "Seattle",
+            "state": "WA",
+            "zip": "98104",
+            "url": "https://ilcorvopasta.com/",
+            "pos": {"lat": 47.602516, "lng": -122.331714}
+        },
+        {
+            "name": "Musashi's",
+            "street": "1400 N 45th St",
+            "city": "Seattle",
+            "state": "WA",
+            "zip": "98103",
+            "url": "https://www.seriouseats.com/2013/12/sushi-sashimi-satisfy-old-school-musashis-seattle.html",
+            "pos": {"lat": 47.661604, "lng": -122.340469}
+        }
+    ]
+}
