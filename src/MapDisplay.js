@@ -135,10 +135,17 @@ class MapDisplay extends Component {
             };
             markerProps.push(mProps);
 
+            let icon = {
+                url: "https://3.bp.blogspot.com/-DBL-fLwVTOA/Wy3epOhWnnI/AAAAAAAANNw/5n14fDWU8EQc9iobtaesks-chn0wXC9sgCLcBGAs/s1600/Map-Marker-Smiley-Heart_Eyes.png",
+                scaledSize: new this.props.google.maps.Size(42, 42)
+            };
+            // TO DO: Pull data from the Yelp API and change the marker icon depending on
+            // the restaurant's ratings
             let animation = this.state.firstDrop ? this.props.google.maps.Animation.DROP : null;
             let marker = new this.props.google.maps.Marker({
                 position: location.pos,
                 map: this.state.map,
+                icon,
                 animation
             });
             marker.addListener('click', () => {

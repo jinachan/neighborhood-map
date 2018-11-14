@@ -1,4 +1,4 @@
-# Neighborhood Maps Project
+# Neighborhood Map Project
 
 Author: Jina Chan
 

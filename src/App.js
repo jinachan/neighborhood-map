@@ -37,7 +37,7 @@ class App extends Component {
     }
   };
 
-  componentDidMount = () => {
+    componentDidMount = () => {
     this.setState({
       ...this.state,
       filtered: this.filterLocations(this.state.all, "")
@@ -71,12 +71,12 @@ class App extends Component {
   }
 
   render() {
-    // TO DO: need to add Font Awesome support so "<i className="fa fa-bars"></i>" works
+    // TO DO: add Font Awesome and replace trigram with "<i className="fa fa-bars"></i>" 
     return (
       <div className="App">
         <div>
           <button onClick={this.toggleDrawer} style={this.styles.menuButton}>
-          &#9776;
+            &#9776;
           </button>
           <h1>Happy Tummy Map for Seattle, WA</h1>
         </div>

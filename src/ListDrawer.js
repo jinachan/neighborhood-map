@@ -32,7 +32,13 @@ class ListDrawer extends Component {
             padding: "3px",
             margin: "30px 0px 10px",
             width: "100%"
-        }
+        },
+        clearButton: {
+            marginLeft: 5,
+            marginRight: 10,
+            background: "white",
+            padding: 10
+          }
     };
 
     updateQuery = (newQuery) => {
@@ -49,11 +55,14 @@ class ListDrawer extends Component {
                         <input 
                             style={this.styles.filterEntry}
                             type="text"
-                            placeholder="Type an eatery name"
+                            placeholder="Filter by eatery name"
                             name="filter"
                             onChange={e => this.updateQuery(e.target.value)}
                             value={this.state.query}
                         />
+                        <button onClick={e => this.updateQuery('')} style={this.styles.clearButton}>
+                            Show all
+                        </button>
                         <ul style={this.styles.noBullets}>
                             {this.props.locations &&
                                 this.props.locations.map((location, index) => {
