@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
+import NoMap from './NoMap';
+
+// API keys
 const MAP_KEY = "AIzaSyDooJxFSbNJe1lpgeube4K4PkIXeWe8ssM";
 const FS_CLIENT = "I1DEPPPUXR4APAUHVOWBISJRFRMERQLQ5W2JSSAYNWBBYIWF";
 const FS_SECRET = "PEDUHODOHQPUC3NSOM3P3JCRXCH5DNZLMZDEJPHZI44OOOGM";
 const FS_VERSION = "20180323";
+
 
 class MapDisplay extends Component {
     state = {
@@ -204,4 +208,4 @@ class MapDisplay extends Component {
     }
 }
 
-export default GoogleApiWrapper({apiKey: MAP_KEY})(MapDisplay);
+export default GoogleApiWrapper({apiKey: MAP_KEY, LoadingContainer:NoMap})(MapDisplay);
