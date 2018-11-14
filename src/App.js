@@ -67,6 +67,7 @@ class App extends Component {
   clickListItem = (index) => {
     // Set the state to reflect the selected location
     this.setState({ selectedIndex: index, isOpen: !this.state.isOpen })
+    console.log("You clicked list item " + index);
   }
 
   render() {
@@ -85,7 +86,7 @@ class App extends Component {
           lng={this.state.lng}
           zoom={this.state.zoom}
           locations={this.state.filtered}
-          selectedIndex={this.selectedIndex}
+          selectedIndex={this.state.selectedIndex}
         />
         <ListDrawer 
           locations={this.state.filtered}

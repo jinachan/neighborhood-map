@@ -20,11 +20,14 @@ class MapDisplay extends Component {
     }
 
     componentWillReceiveProps = (props) => {
+        console.log("Selected index is " + props.selectedIndex);
+
         // Only drop the markers the first time
         this.setState({firstDrop: false});
 
         // Change in the number of locations --> update markers
         if (this.state.markers.length !== props.locations.length) {
+            console.log("Number of markers has changed");
             this.closeInfoWindow();
             this.updateMarkers(props.locations);
             this.setState({activeMarker: null});
@@ -34,15 +37,18 @@ class MapDisplay extends Component {
         // Selected item is not the same as the active marker, so close infowindow
         if (!props.selectedIndex || (this.state.activeMarker &&
             (this.state.markers[props.selectedIndex] !== this.state.activeMarker))) {
+                console.log("Selected item differs from active marker");
                 this.closeInfoWindow();
             }
 
         // Make sure there's a selected index
         if (props.selectedIndex === null || typeof(props.selectedIndex) === "undefined") {
+            console.log("There's no selected index");
             return;
         }
 
         // Treat the marker as clicked
+        console.log("Treating the marker as clicked");
         this.onMarkerClick(this.state.markerProps[props.selectedIndex], this.state.markers[props.selectedIndex]);
     }
 
