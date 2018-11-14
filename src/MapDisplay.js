@@ -19,6 +19,33 @@ class MapDisplay extends Component {
 
     }
 
+    componentWillReceiveProps = (props) => {
+        // Only drop the markers the first time
+        this.setState({firstDrop: false});
+
+        // Change in the number of locations --> update markers
+        if (this.state.markers.length !== props.locations.length) {
+            this.closeInfoWindow();
+            this.updateMarkers(props.locations);
+            this.setState({activeMarker: null});
+            return;
+        }
+
+        // Selected item is not the same as the active marker, so close infowindow
+        if (!props.selectedIndex || (this.state.activeMarker &&
+            (this.state.markers[props.selectedIndex] !== this.state.activeMarker))) {
+                this.closeInfoWindow();
+            }
+
+        // Make sure there's a selected index
+        if (props.selectedIndex === null || typeof(props.selectedIndex) === "undefined") {
+            return;
+        }
+
+        // Treat the marker as clicked
+        this.onMarkerClick(this.state.markerProps[props.selectedIndex], this.state.markers[props.selectedIndex]);
+    }
+
     closeInfoWindow = () => {
         // Disable any active marker animation
         this.state.activeMarker && (this.state.activeMarker.setAnimation(null));
@@ -98,7 +125,7 @@ class MapDisplay extends Component {
             };
             markerProps.push(mProps);
 
-            let animation = this.props.google.maps.Animation.DROP;
+            let animation = this.state.firstDrop ? this.props.google.maps.Animation.DROP : null;
             let marker = new this.props.google.maps.Marker({
                 position: location.pos,
                 map: this.state.map,

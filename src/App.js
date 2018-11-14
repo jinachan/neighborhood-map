@@ -64,12 +64,18 @@ class App extends Component {
     return locations.filter(location => location.name.toLowerCase().includes(query.toLowerCase()));
   }
 
+  clickListItem = (index) => {
+    // Set the state to reflect the selected location
+    this.setState({ selectedIndex: index, isOpen: !this.state.isOpen })
+  }
+
   render() {
+    // TO DO: need to add Font Awesome support so "<i className="fa fa-bars"></i>" works
     return (
       <div className="App">
         <div>
           <button onClick={this.toggleDrawer} style={this.styles.menuButton}>
-            <i className="fa fa-bars"></i>
+          &#9776;
           </button>
           <h1>Happy Tummy Map for Seattle, WA</h1>
         </div>
@@ -79,12 +85,14 @@ class App extends Component {
           lng={this.state.lng}
           zoom={this.state.zoom}
           locations={this.state.filtered}
+          selectedIndex={this.selectedIndex}
         />
         <ListDrawer 
           locations={this.state.filtered}
           isOpen={this.state.isOpen}
           toggleDrawer={this.toggleDrawer}
           filterLocations={this.updateQuery}
+          clickListItem={this.clickListItem}
         />
       </div>
     );
