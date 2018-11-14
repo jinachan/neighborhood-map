@@ -3,6 +3,11 @@ import './App.css';
 import locations from './data/locations.json';
 import MapDisplay from './MapDisplay';
 
+/*
+ * Credit: App design based on Doug Brown's Udacity walkthrough
+ * Source: https://youtu.be/NVAVLCJwAAo
+ */
+
 class App extends Component {
   state = {
     lat: 47.62557,

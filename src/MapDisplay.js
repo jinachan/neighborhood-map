@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 const MAP_KEY = "AIzaSyDooJxFSbNJe1lpgeube4K4PkIXeWe8ssM";
+const FS_CLIENT = "I1DEPPPUXR4APAUHVOWBISJRFRMERQLQ5W2JSSAYNWBBYIWF";
+const FS_SECRET = "PEDUHODOHQPUC3NSOM3P3JCRXCH5DNZLMZDEJPHZI44OOOGM";
+const FS_VERSION = "20180323";
 
 class MapDisplay extends Component {
     state = {
@@ -22,12 +25,56 @@ class MapDisplay extends Component {
         this.setState({isInfoWindowShowing: false, activeMarker: null, activeMarkerProps: null});
     }
 
+    getBusinessInfo = (props, data) => {
+        // Look for matching restaurant data in FourSquare
+        return data.response.venues.filter(item => item.name.includes(props.name) || props.name.includes(item.name));
+    }
+
     onMarkerClick = (props, marker, event) => {
         // Close any infowindow that's open
         this.closeInfoWindow();
 
-        // Set the state to have the marker info show
-        this.setState({isInfoWindowShowing: true, activeMarker: marker, activeMarkerProps: props});
+        // Fetch the FourSquare data for the selected restaurant
+        let url = `https://api.foursquare.com/v2/venues/search?client_id=${FS_CLIENT}&client_secret=${FS_SECRET}&v=${FS_VERSION}&radius=100&ll=${props.position.lat},${props.position.lng}&llAcc=100`;
+        let headers = new Headers();
+        let request = new Request(url, {
+            method: 'GET',
+            headers
+        });
+
+        // Create props for the active marker
+        let activeMarkerProps;
+        fetch(request)
+            .then(response => response.json())
+            .then(result => {
+                // Get just the business reference for the restaurant we want
+                let restaurant = this.getBusinessInfo(props, result);
+                activeMarkerProps = {
+                    ...props,
+                    foursquare: restaurant[0]
+                };
+
+                if (activeMarkerProps.foursquare) {
+                    // If there is FourSquare data, get the list of images for this restaurant
+                    let url=`https://api.foursquare.com/v2/venues/${restaurant[0].id}/photos?client_id=${FS_CLIENT}&client_secret=${FS_SECRET}&v=${FS_VERSION}`;
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(result => {
+                            activeMarkerProps = {
+                                ...activeMarkerProps,
+                                images: result.response.photos
+                            };
+                            if (this.state.activeMarker)
+                                this.state.activeMarker.setAnimation(null);
+                            marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
+                            this.setState({isInfoWindowShowing: true, activeMarker: marker, activeMarkerProps});
+                        })
+                    } else {
+                        // Finish setting state with the data we have
+                        marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
+                        this.setState({isInfoWindowShowing: true, activeMarker: marker, activeMarkerProps});
+                    }
+            })
     }
 
     updateMarkers = (locations) => {
@@ -107,6 +154,16 @@ class MapDisplay extends Component {
                             <a href={amProps.url}>Website</a>
                         )
                         : ""}
+                        {amProps && amProps.images
+                        ? (
+                            <div> <img 
+                                alt={amProps.name + " photo"}
+                                src={amProps.images.items[0].prefix + "100x100" + amProps.images.items[0].suffix}/>
+                                <p>Image from Foursqure</p>
+                            </div>
+                        )
+                        : ""
+                        }
                     </div>
                 </InfoWindow>
             </Map>

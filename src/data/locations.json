@@ -12,12 +12,24 @@
         }
     },
     {
+        "name": "Kau Kau BBQ",
+        "street": "656 S King St",
+        "city": "Seattle",
+        "state": "WA",
+        "zip": "98104",
+        "url": "http://www.kaukaubbq.com/",
+        "pos": {
+            "lat": 47.598475,
+            "lng": -122.324696
+        }
+    },
+    {
         "name": "Jade Garden",
         "street": "424 7th Ave S",
         "city": "Seattle",
         "state": "WA",
         "zip": "98104",
-        "url": "https://www.thestranger.com/locations/205018/jade-garden",
+        "url": "",
         "pos": {
             "lat": 47.598511,
             "lng": -122.323554
@@ -53,10 +65,22 @@
         "city": "Seattle",
         "state": "WA",
         "zip": "98103",
-        "url": "https://www.seriouseats.com/2013/12/sushi-sashimi-satisfy-old-school-musashis-seattle.html",
+        "url": "",
         "pos": {
             "lat": 47.661604,
             "lng": -122.340469
+        }
+    },
+    {
+        "name": "Chocolati",
+        "street": "",
+        "city": "Seattle",
+        "state": "WA",
+        "zip": "98103",
+        "url": "https://chocolati.com/?page_id=387",
+        "pos": {
+            "lat": 47.66152,
+            "lng": -122.336802
         }
     }
 ]
